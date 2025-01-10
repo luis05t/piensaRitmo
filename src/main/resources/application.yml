@@ -1,0 +1,22 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+
+spring:
+
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+
+  datasource:
+    url: jdbc:postgresql://bubble.db.elephantsql.com:5432/dmvjrufh?socketTimeout=3
+    username: dmvjrufh
+    password: aOODLM-GRF5nALdesiToJq_wKC_Ufmfk
+    driverClassName: org.postgresql.Driver
