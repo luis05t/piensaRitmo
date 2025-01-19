@@ -10,14 +10,23 @@ import org.springframework.web.bind.annotation.*
 class UserController(private val userService: UserService) {
 
     @PostMapping
-    fun createUser(@RequestBody userDTO: UserDTO): ResponseEntity<Any> =
-        ResponseEntity.ok(userService.createUser(userDTO))
+    fun createUser(@RequestBody userDTO: UserDTO): ResponseEntity<UserDTO> {
+        retzurn ResponseEntity.ok(userService.createUser(userDTO))
+    }
 
-    @GetMapping("/{cedula}")
-    fun getUserByCedula(@PathVariable cedula: String): ResponseEntity<Any> =
-        ResponseEntity.ok(userService.getUserByCedula(cedula) ?: throw Exception("User not found"))
+    @GetMapping("/{id}")
+    fun getUser(@PathVariable id: Long): ResponseEntity<UserDTO> {
+        return ResponseEntity.ok(userService.getUser(id))
+    }
 
-    @DeleteMapping("/{cedula}")
-    fun deleteUser(@PathVariable cedula: String): ResponseEntity<Any> =
-        ResponseEntity.ok(userService.deleteUser(cedula))
+    @DeleteMapping("/{id}")
+    fun deleteUser(@PathVariable id: Long): ResponseEntity<Void> {
+        userService.deleteUser(id)
+        return ResponseEntity.noContent().build()
+    }
+
+    @PatchMapping("/{id}")
+    fun updateUser(@PathVariable id: Long, @RequestBody userDTO: UserDTO): ResponseEntity<UserDTO> {
+        return ResponseEntity.ok(userService.updateUser(id, userDTO))
+    }
 }

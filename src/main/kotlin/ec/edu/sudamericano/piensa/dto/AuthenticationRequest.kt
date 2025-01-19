@@ -1,8 +1,6 @@
 package ec.edu.sudamericano.piensa.dto
 
-data class UserDTO(
-    val cedula: String,
-    val name: String,
+data class AuthenticationRequest(
     val email: String,
     val password: String
 )
